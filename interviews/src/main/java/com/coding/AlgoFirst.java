@@ -35,8 +35,13 @@ public class AlgoFirst {
 
     // Solution of #53
     public int maxSubArray(int[] nums) {
+        int[] store = new int[nums.length ];
 
-        return  0;
+        store[0] = nums[0];
+        for (int i = 1 ; i< nums.length ; i++){
+                store[i] = Math.max(  nums[i], nums[i]+ store[i-1]);
+        }
+        return  Arrays.stream(  store).max().getAsInt();
     }
 
 
