@@ -1,6 +1,8 @@
 package com.coding;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ArrayList;
 public class AlgoFirst {
@@ -45,6 +47,26 @@ public class AlgoFirst {
     }
 
 
+    //#49
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,List<String>>  store = new LinkedHashMap<>();
+        for( final String s: strs ) {
+                Arrays.sort( s.toCharArray());
+            if (  store.containsKey(  s)){
+               //TBD
+
+            }
+            else {
+
+            }
+
+        }
+        return  null;
+
+    }
+
+
+
     //solution of #1
 
     public int[] twoSum(int[] nums, int target) {
@@ -68,5 +90,35 @@ public class AlgoFirst {
         return new int[]{-1,-1};
     }
 
+
+    // Solution of #162
+    public int findPeakElement(int[] nums) {
+        int peak = Integer.MIN_VALUE;
+        int index=0;
+        for (  int i =  0 ; i <   nums.length; i ++ ){
+            if  ( nums[ i]>peak){
+                peak = nums[i] ;
+                index =i;
+
+            }
+        }
+        return index;
+    }
+
+ //    #852
+
+    public int peakIndexInMountainArray(int[] arr) {
+        int peakIndex = 0 ;
+        for (  int i = 1 ; i <  arr.length ; i++ ){
+            if (arr[ i -1]<arr[i]) {
+                continue;
+            }
+            else{
+                peakIndex = i-1 ;
+                return peakIndex;
+            }
+        }
+        return  peakIndex;
+    }
 
 }

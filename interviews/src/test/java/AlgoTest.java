@@ -26,4 +26,12 @@ public class AlgoTest {
          Assertions.assertEquals( expected,actualSumIndex );
     }
 
+    @Test
+    public void testPeakElement(){
+         int  peakElement1 =algoFirst.findPeakElement( new int [] {1,2,3,1});
+          Assertions.assertEquals( 2,  peakElement1);
+          int peakElement2 = algoFirst.findPeakElement(new int[]{1,2,1,3,5,6,4});
+          Assertions.assertEquals(5,  peakElement2);
+    }
+
 }
