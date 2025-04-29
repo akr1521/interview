@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.stream.Stream;
 
-// create a Generic Itertor
+// create a Generic Iter tor
 interface  BaseIterator<T>{
            boolean hasPrevious();
            boolean hasNext();
@@ -101,4 +101,26 @@ class  Encryption<T extends Encrypt>{
 
 
 
+}
+
+
+interface  DataProcessor<T extends Data>{
+        void processData ( T data);
+}
+
+class UserDataProcessor implements  DataProcessor<UserData>{
+
+    @Override
+    public void processData (UserData data) {
+
+        System.out.println( " USer Data : " +   data.getUsername());
+    }
+}
+
+
+class ProductDataProcessor implements DataProcessor<ProductData> {
+    @Override
+    public void processData (ProductData data) {
+        System.out.println( " Product  Data : " +   data.getProductName());
+    }
 }
