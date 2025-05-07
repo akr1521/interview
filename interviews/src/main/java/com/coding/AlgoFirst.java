@@ -5,7 +5,79 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.*;
+
 public class AlgoFirst {
+
+    //Leetcode 70
+
+    public int climbStairs(int n) {
+        int first = 0 , second =1;
+
+
+        return -1;
+    }
+
+
+    //find anagrams
+    public List<Integer> findAnagrams( String s,String p   ){
+
+        char[]  pattern  = p.toCharArray();
+
+
+        return null ;
+    }
+
+
+
+// group anagrams
+
+    public List<List<String>> groupAnagrams2(String[] strs) {
+        Map<String,List<String>>  store=  new HashMap<>();
+        List<List<String>> answer = new ArrayList<> ();
+        for( final String s: strs ) {
+            String    dummy  = s;
+            char[] arr =  dummy.toCharArray();
+
+            Arrays.sort(  arr);
+            dummy = new String (arr);
+
+            System.out.println(  " dummy after Sort :"   +  dummy);
+            if  (store.containsKey(dummy)){
+                List<String>  l = store.get(dummy );
+                l.add(s);
+                store.put( dummy, l);
+            }else{
+                List<String> list=  new ArrayList<>();
+                list.add(s);
+                store.put(dummy, list );
+            }
+
+        }
+        for ( List<String>  ls : store.values()){
+            answer.add( ls);
+        }
+
+        return  answer;
+    }
+
+
+
+    // Leetcode 128
+    public int longestConsecutive(int[] nums) {
+        int count = 0 ;
+        Set<Integer> set = Arrays.stream( nums).boxed().collect(Collectors.toSet());
+
+        for (int num: set){
+            if (  set.contains( num -1)){
+
+            }
+        }
+        return -1;
+    }
+
 
     //solution of  #268
 

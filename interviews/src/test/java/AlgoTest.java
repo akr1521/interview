@@ -34,4 +34,9 @@ public class AlgoTest {
           Assertions.assertEquals(5,  peakElement2);
     }
 
+    @Test
+    public void testAnagram(){
+        algoFirst.groupAnagrams2( new String[]{ "eat","tea","tan","ate","nat","bat" });;
+    }
+
 }
