@@ -99,14 +99,7 @@ public class StreamExpo {
         System.out.println( p);
     }
 
-    public  void   usingStreamJoining(){
-        // Creating a character list
-        List<Character> ch=Arrays.asList(
-        'G','e','e','k','s','f','o','r','G',
-        'e','e','k','s');
 
-
-        }
 
         //Conbine adjacent
         public static List<String> combineAdjacent(List<String> list) {
