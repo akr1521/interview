@@ -52,16 +52,20 @@ public class FunctionalExpo {
         Stream.generate(counterSupplier1).limit(5).forEach(System.out::println);
     }
 
+    public  void  supplierOperations ()
+    {
+        String supplier1= supplier_1( null, ()-> "Guest");
+        System.out.println( "Supplier 1:  "  +  supplier1);
+        System.out.println( " Get Random Number: "  +  supplier_2().get());
+        System.out.println( " Get Random Number:  "  +  supplier_2().get());
+        System.out.println( " Get Random Number:  "  +  supplier_2().get());
+
+    }
 
 
     public static void main (String args[]){
         FunctionalExpo  functionalExpo = new FunctionalExpo();
-        String supplier1=  functionalExpo.supplier_1( null, ()-> "Guest");
-        System.out.println( "Supplier 1:  "  +  supplier1);
-
-        System.out.println( " Get Random Number: "  +  functionalExpo.supplier_2().get());
-        System.out.println( " Get Random Number:  "  +  functionalExpo.supplier_2().get());
-        System.out.println( " Get Random Number:  "  +  functionalExpo.supplier_2().get());
+        functionalExpo.supplierOperations();
 
         // Expensive object is not created yet
         System.out.println("First time accessing:");
@@ -80,8 +84,6 @@ public class FunctionalExpo {
     // calling all Cosnuemr based operations from here
     public static void  consumerOperations (){
         consumer_expo1();
-
-
     }
 
 

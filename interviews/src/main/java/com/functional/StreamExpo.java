@@ -1,6 +1,10 @@
 package com.functional;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamExpo {
@@ -9,7 +13,10 @@ public class StreamExpo {
     public static void main (String args[]){
         StreamExpo streamExpo = new StreamExpo();
         streamExpo.usingIterateinStream();
-
+        streamExpo.usingPeekOperations();
+        streamExpo.usingStreamGenerate();
+        streamExpo.usingGroupingBy();
+        combineAdjacent(Arrays.asList("1", "2", "3", "4")).forEach(System.out::println);
     }
 
 
@@ -48,5 +55,90 @@ public class StreamExpo {
 
     }
 
+    public void usingPeekOperations() {
+        Stream<String> nameStream = Stream.of("Alex", "Agnieszka", "Billy");
+        Consumer<String> consumer =    name-> System.out.println(name);
+        List<String>  formattedList =nameStream.filter(   name-> name.startsWith("A")).peek( consumer).collect(Collectors.toList());
 
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4);
+        List<Integer> peekedList = new ArrayList<>();
+        List<Integer> result = integers.stream().filter( element-> element%2 == 0 ).map (  element -> element*2 )
+                .peek(peekedList::add)
+                .collect(Collectors.toList());
+        peekedList.stream().forEach( a  -> System.out.println(a));
+
+    }
+
+
+    // Strema Generate using supplier
+    public void usingStreamGenerate(){
+        Random random = new Random();
+        Supplier<Integer> randomIntSupplier = random::nextInt;
+        Stream<Integer> randomIntStream = Stream.generate(randomIntSupplier);
+        //start the Stream
+        randomIntStream.limit(20).map( number-> Math.abs(number)).forEach(  number ->  System.out.println( number));
+    }
+
+
+    //  Grouping cities on the basis of an Input
+    public void usingGroupingBy(){
+        List<Person> people = Arrays.asList(
+                new Person("Alice", "New York"),
+                new Person("Bob", "London"),
+                new Person("Charlie", "New York"),
+                new Person("David", "Paris"),
+                new Person("Eve", "London")
+        );
+        Function<Person, String> cityfiltered =   ( person) -> person.getCity();
+        Map<String, List<Person>> cityAndName = people.stream().collect(Collectors.groupingBy(  cityfiltered));
+        System.out.println( "City:"  + cityAndName );
+
+        Map
+                <String,
+                        Long>  p =    people.stream().collect(Collectors.groupingBy(  cityfiltered ,Collectors.counting()));
+        System.out.println( p);
+    }
+
+    public  void   usingStreamJoining(){
+        // Creating a character list
+        List<Character> ch=Arrays.asList(
+        'G','e','e','k','s','f','o','r','G',
+        'e','e','k','s');
+
+
+        }
+
+        //Conbine adjacent
+        public static List<String> combineAdjacent(List<String> list) {
+            if (list.size() < 2) {
+                return new ArrayList<>(); // Cannot form pairs
+            }
+
+            return java.util.stream.IntStream.range(0, list.size() - 1)
+                    .mapToObj(i -> list.get(i) + list.get(i + 1))
+                    .collect(Collectors.toList());
+        }
+
+
+
+}
+
+
+class Person {
+    String name;
+    String city;
+
+    public Person(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{name='" + name + "', city='" + city + "'}";
+    }
 }
