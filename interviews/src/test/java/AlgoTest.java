@@ -1,4 +1,4 @@
-import com.coding.AlgoFirst;
+import app.coding.AlgoFirst;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

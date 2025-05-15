@@ -1,0 +1,29 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- JDBC Database connection settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/zepcard</property>
+        <property name="hibernate.connection.username">akash</property>
+        <property name="hibernate.connection.password">akash</property>
+
+        <!-- JDBC connection pool (use built-in) -->
+        <property name="connection.pool_size">10</property>
+
+        <!-- SQL dialect for PostgreSQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Enable SQL logging -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- Update schema automatically -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Annotated entity class -->
+        <mapping class="com.example.model.Product"/>
+    </session-factory>
+</hibernate-configuration>
