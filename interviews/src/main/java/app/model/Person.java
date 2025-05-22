@@ -11,6 +11,18 @@ public class Person {
         this.city = city;
     }
 
+    public String getName () {
+        return name;
+    }
+
+    public void setName (String name) {
+        this.name = name;
+    }
+
+    public void setCity (String city) {
+        this.city = city;
+    }
+
     public String getCity() {
         return city;
     }

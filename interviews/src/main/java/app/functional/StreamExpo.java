@@ -19,6 +19,8 @@ public class StreamExpo {
         streamExpo.usingStreamGenerate();
         streamExpo.usingGroupingBy();
         combineAdjacent(Arrays.asList("1", "2", "3", "4")).forEach(System.out::println);
+        streamExpo.partitionedByCity();
+        streamExpo.reducingByCity();
     }
 
 
@@ -84,13 +86,13 @@ public class StreamExpo {
 
     //  Grouping cities on the basis of an Input
     public Map<String, List<Person>> usingGroupingBy(){
-        List<Person> people = Arrays.asList(
-                new Person("Alice", "New York"),
-                new Person("Bob", "London"),
-                new Person("Charlie", "New York"),
-                new Person("David", "Paris"),
-                new Person("Eve", "London")
-        );
+            List<Person> people = Arrays.asList(
+                    new Person("Alice", "New York"),
+                    new Person("Bob", "London"),
+                    new Person("Charlie", "New York"),
+                    new Person("David", "Paris"),
+                    new Person("Eve", "London")
+            );
         Function<Person, String> cityfiltered =   ( person) -> person.getCity();
         Map<String, List<Person>> cityAndName = people.stream().collect(Collectors.groupingBy(  cityfiltered));
         System.out.println( "City:"  + cityAndName );
@@ -103,6 +105,57 @@ public class StreamExpo {
     }
 
 
+    Map<Boolean, List<String>> partitionedByCity (){
+        List<Person> people = Arrays.asList(
+                new Person("Alice", "New York"),
+                new Person("Bob", "London"),
+                new Person("Charlie", "New York"),
+                new Person("David", "Paris"),
+                new Person("Eve", "London"),
+                new Person( "Basia", "Krakow"),
+                new Person("Willis" ,"Warsaw"),
+        new Person("Willos" ,"Warsaw"),
+        new Person("Meso" ,"Warsaw"),
+        new Person("Marlie" ,"Warsaw")
+
+        );
+        Map<Boolean,List<String>>  partitionByCity =  people.stream().collect(Collectors.partitioningBy(
+                person -> person.getCity().equals("Warsaw"),
+                Collectors.mapping(Person::getName, Collectors.toList())
+        ));
+
+        System.out.println( "Partition By City :" + partitionByCity);
+        return   partitionByCity;
+    }
+
+
+    public void reducingByCity(){
+        List<Person> people = Arrays.asList(
+                new Person("Alice", "New York"),
+                new Person("Bob", "London"),
+                new Person("Charlie", "New York"),
+                new Person("David", "Paris"),
+                new Person("Eve", "London"),
+                new Person( "Basia", "Krakow"),
+                new Person("Willis" ,"Warsaw"),
+                new Person("Willos" ,"Warsaw"),
+                new Person("Meso" ,"Warsaw"),
+                new Person("Marlie" ,"Warsaw")
+
+        );
+        Map<Boolean, String> namesByCity = people.stream()
+                .collect(Collectors.partitioningBy(
+                        person -> person.getCity().equals("New York"),
+                        Collectors.reducing(
+                                "",
+                                Person::getName,
+                                (s1, s2) -> s1.isEmpty() ? s2 : s1 + "," + s2 // Combine names
+                        )
+                ));
+
+        System.out.println("People in New York: " + namesByCity.get(true));
+        System.out.println("People not in New York: " + namesByCity.get(false));
+    }
 
         //Conbine adjacent
         public static List<String> combineAdjacent(List<String> list) {
